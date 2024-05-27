@@ -1,0 +1,334 @@
+cn124
+    description: Computer
+    width: 64 bits
+    capabilities: smp vsyscall32
+  *-core
+       description: Motherboard
+       physical id: 0
+     *-memory
+          description: System memory
+          physical id: 0
+          size: 32GiB
+     *-cpu
+          product: Intel(R) Xeon(R) E-2378 CPU @ 2.60GHz
+          vendor: Intel Corp.
+          physical id: 1
+          bus info: cpu@0
+          version: 6.167.1
+          size: 1075MHz
+          capacity: 2600MHz
+          width: 64 bits
+          capabilities: fpu fpu_exception wp vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp x86-64 constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb invpcid_single ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow vnmi flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid mpx avx512f avx512dq rdseed adx smap avx512ifma clflushopt intel_pt avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves dtherm arat pln pts hwp hwp_act_window hwp_epp hwp_pkg_req avx512vbmi umip pku ospke avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid fsrm md_clear flush_l1d arch_capabilities cpufreq
+          configuration: microcode=87
+     *-pci
+          description: Host bridge
+          product: Intel Corporation
+          vendor: Intel Corporation
+          physical id: 100
+          bus info: pci@0000:00:00.0
+          version: 01
+          width: 32 bits
+          clock: 33MHz
+          configuration: driver=icl_uncore
+          resources: irq:0
+        *-pci:0
+             description: PCI bridge
+             product: Intel Corporation
+             vendor: Intel Corporation
+             physical id: 1
+             bus info: pci@0000:00:01.0
+             version: 01
+             width: 32 bits
+             clock: 33MHz
+             capabilities: pci normal_decode bus_master cap_list
+             configuration: driver=pcieport
+             resources: irq:121
+        *-pci:1
+             description: PCI bridge
+             product: Intel Corporation
+             vendor: Intel Corporation
+             physical id: 1.1
+             bus info: pci@0000:00:01.1
+             version: 01
+             width: 32 bits
+             clock: 33MHz
+             capabilities: pci normal_decode bus_master cap_list
+             configuration: driver=pcieport
+             resources: irq:122 ioport:3000(size=4096) memory:91e00000-91efffff ioport:4000000000(size=2097152)
+           *-sas
+                description: Serial Attached SCSI controller
+                product: Fusion-MPT 12GSAS/PCIe Secure SAS38xx
+                vendor: Broadcom / LSI
+                physical id: 0
+                bus info: pci@0000:02:00.0
+                version: 00
+                width: 64 bits
+                clock: 33MHz
+                capabilities: sas bus_master cap_list rom
+                configuration: driver=mpt3sas latency=0
+                resources: iomemory:400-3ff iomemory:400-3ff irq:17 memory:4000100000-40001fffff memory:4000000000-40000fffff memory:91e00000-91efffff ioport:3000(size=256)
+        *-usb
+             description: USB controller
+             product: Tiger Lake-H USB 3.2 Gen 2x1 xHCI Host Controller
+             vendor: Intel Corporation
+             physical id: 14
+             bus info: pci@0000:00:14.0
+             version: 11
+             width: 64 bits
+             clock: 33MHz
+             capabilities: xhci bus_master cap_list
+             configuration: driver=xhci_hcd latency=0
+             resources: iomemory:400-3ff irq:127 memory:4000300000-400030ffff
+        *-memory UNCLAIMED
+             description: RAM memory
+             product: Tiger Lake-H Shared SRAM
+             vendor: Intel Corporation
+             physical id: 14.2
+             bus info: pci@0000:00:14.2
+             version: 11
+             width: 64 bits
+             clock: 33MHz (30.3ns)
+             capabilities: bus_master cap_list
+             configuration: latency=0
+             resources: iomemory:400-3ff iomemory:400-3ff memory:4000310000-4000313fff memory:4000317000-4000317fff
+        *-communication:0 UNCLAIMED
+             description: Communication controller
+             product: Tiger Lake-H Management Engine Interface
+             vendor: Intel Corporation
+             physical id: 16
+             bus info: pci@0000:00:16.0
+             version: 11
+             width: 64 bits
+             clock: 33MHz
+             capabilities: bus_master cap_list
+             configuration: latency=0
+             resources: iomemory:400-3ff memory:4000316000-4000316fff
+        *-communication:1 UNCLAIMED
+             description: Communication controller
+             product: Intel Corporation
+             vendor: Intel Corporation
+             physical id: 16.4
+             bus info: pci@0000:00:16.4
+             version: 11
+             width: 64 bits
+             clock: 33MHz
+             capabilities: bus_master cap_list
+             configuration: latency=0
+             resources: iomemory:400-3ff memory:4000315000-4000315fff
+        *-sata
+             description: SATA controller
+             product: Intel Corporation
+             vendor: Intel Corporation
+             physical id: 17
+             bus info: pci@0000:00:17.0
+             version: 11
+             width: 32 bits
+             clock: 66MHz
+             capabilities: sata ahci_1.0 bus_master cap_list
+             configuration: driver=ahci latency=0
+             resources: irq:128 memory:91f40000-91f41fff memory:91f44000-91f440ff ioport:4040(size=8) ioport:4048(size=4) ioport:4020(size=32) memory:91f43000-91f437ff
+        *-pci:2
+             description: PCI bridge
+             product: Intel Corporation
+             vendor: Intel Corporation
+             physical id: 1b
+             bus info: pci@0000:00:1b.0
+             version: 11
+             width: 32 bits
+             clock: 33MHz
+             capabilities: pci normal_decode bus_master cap_list
+             configuration: driver=pcieport
+             resources: irq:123 memory:91a00000-91dfffff
+        *-pci:3
+             description: PCI bridge
+             product: Intel Corporation
+             vendor: Intel Corporation
+             physical id: 1b.6
+             bus info: pci@0000:00:1b.6
+             version: 11
+             width: 32 bits
+             clock: 33MHz
+             capabilities: pci normal_decode bus_master cap_list
+             configuration: driver=pcieport
+             resources: irq:124
+        *-pci:4
+             description: PCI bridge
+             product: Intel Corporation
+             vendor: Intel Corporation
+             physical id: 1c
+             bus info: pci@0000:00:1c.0
+             version: 11
+             width: 32 bits
+             clock: 33MHz
+             capabilities: pci normal_decode bus_master cap_list
+             configuration: driver=pcieport
+             resources: irq:125 memory:91000000-918fffff ioport:90000000(size=16777216)
+           *-pci
+                description: PCI bridge
+                product: PCI Express Bridge
+                vendor: PLDA
+                physical id: 0
+                bus info: pci@0000:05:00.0
+                version: 02
+                width: 32 bits
+                clock: 33MHz
+                capabilities: pci normal_decode bus_master cap_list
+                resources: memory:91000000-918fffff ioport:90000000(size=16777216)
+              *-display UNCLAIMED
+                   description: VGA compatible controller
+                   product: Integrated Matrox G200eW3 Graphics Controller
+                   vendor: Matrox Electronics Systems Ltd.
+                   physical id: 0
+                   bus info: pci@0000:06:00.0
+                   version: 04
+                   width: 32 bits
+                   clock: 66MHz
+                   capabilities: vga_controller bus_master cap_list
+                   configuration: latency=64 maxlatency=32 mingnt=16
+                   resources: memory:90000000-90ffffff memory:91808000-9180bfff memory:91000000-917fffff memory:c0000-dffff
+        *-pci:5
+             description: PCI bridge
+             product: Intel Corporation
+             vendor: Intel Corporation
+             physical id: 1c.1
+             bus info: pci@0000:00:1c.1
+             version: 11
+             width: 32 bits
+             clock: 33MHz
+             capabilities: pci normal_decode bus_master cap_list
+             configuration: driver=pcieport
+             resources: irq:126 memory:91900000-919fffff ioport:4000200000(size=1048576)
+           *-network:0
+                description: Ethernet interface
+                product: NetXtreme BCM5720 Gigabit Ethernet PCIe
+                vendor: Broadcom Inc. and subsidiaries
+                physical id: 0
+                bus info: pci@0000:07:00.0
+                logical name: eno8303
+                version: 00
+                serial: 6c:3c:8c:62:97:d6
+                size: 1Gbit/s
+                capacity: 1Gbit/s
+                width: 64 bits
+                clock: 33MHz
+                capabilities: bus_master cap_list rom ethernet physical tp 10bt 10bt-fd 100bt 100bt-fd 1000bt 1000bt-fd autonegotiation
+                configuration: autonegotiation=on broadcast=yes driver=tg3 driverversion=5.15.0-69-generic duplex=full firmware=FFV22.00.6 bc 5720-v1.39 ip=131.174.136.203 latency=0 link=yes multicast=yes port=twisted pair speed=1Gbit/s
+                resources: iomemory:400-3ff iomemory:400-3ff iomemory:400-3ff irq:17 memory:4000250000-400025ffff memory:4000240000-400024ffff memory:4000230000-400023ffff memory:91900000-9193ffff
+           *-network:1 DISABLED
+                description: Ethernet interface
+                product: NetXtreme BCM5720 Gigabit Ethernet PCIe
+                vendor: Broadcom Inc. and subsidiaries
+                physical id: 0.1
+                bus info: pci@0000:07:00.1
+                logical name: eno8403
+                version: 00
+                serial: 6c:3c:8c:62:97:d7
+                capacity: 1Gbit/s
+                width: 64 bits
+                clock: 33MHz
+                capabilities: bus_master cap_list rom ethernet physical tp 10bt 10bt-fd 100bt 100bt-fd 1000bt 1000bt-fd autonegotiation
+                configuration: autonegotiation=on broadcast=yes driver=tg3 driverversion=5.15.0-69-generic firmware=FFV22.00.6 bc 5720-v1.39 latency=0 link=no multicast=yes port=twisted pair
+                resources: iomemory:400-3ff iomemory:400-3ff iomemory:400-3ff irq:18 memory:4000220000-400022ffff memory:4000210000-400021ffff memory:4000200000-400020ffff memory:91940000-9197ffff
+        *-isa
+             description: ISA bridge
+             product: Intel Corporation
+             vendor: Intel Corporation
+             physical id: 1f
+             bus info: pci@0000:00:1f.0
+             version: 11
+             width: 32 bits
+             clock: 33MHz
+             capabilities: isa bus_master
+             configuration: latency=0
+           *-pnp00:00
+                product: PnP device PNP0c02
+                physical id: 0
+                capabilities: pnp
+                configuration: driver=system
+           *-pnp00:01
+                product: PnP device INT3f0d
+                physical id: 1
+                capabilities: pnp
+                configuration: driver=system
+           *-pnp00:02
+                product: PnP device PNP0501
+                physical id: 2
+                capabilities: pnp
+                configuration: driver=serial
+           *-pnp00:03
+                product: PnP device PNP0501
+                physical id: 3
+                capabilities: pnp
+                configuration: driver=serial
+           *-pnp00:04
+                product: PnP device PNP0c02
+                physical id: 4
+                capabilities: pnp
+                configuration: driver=system
+           *-pnp00:05
+                product: PnP device PNP0c02
+                physical id: 5
+                capabilities: pnp
+                configuration: driver=system
+           *-pnp00:06
+                product: PnP device PNP0c02
+                physical id: 6
+                capabilities: pnp
+                configuration: driver=system
+           *-pnp00:07
+                product: PnP device PNP0c02
+                physical id: 7
+                capabilities: pnp
+                configuration: driver=system
+           *-pnp00:08
+                product: PnP device PNP0c02
+                physical id: 8
+                capabilities: pnp
+                configuration: driver=system
+        *-serial:0
+             description: SMBus
+             product: Tiger Lake-H SMBus Controller
+             vendor: Intel Corporation
+             physical id: 1f.4
+             bus info: pci@0000:00:1f.4
+             version: 11
+             width: 64 bits
+             clock: 33MHz
+             configuration: driver=i801_smbus latency=0
+             resources: iomemory:400-3ff irq:16 memory:4000314000-40003140ff ioport:efa0(size=32)
+        *-serial:1 UNCLAIMED
+             description: Serial bus controller
+             product: Tiger Lake-H SPI Controller
+             vendor: Intel Corporation
+             physical id: 1f.5
+             bus info: pci@0000:00:1f.5
+             version: 11
+             width: 32 bits
+             clock: 33MHz
+             capabilities: bus_master
+             configuration: latency=0
+             resources: memory:91f00000-91f00fff
+  *-graphics
+       product: EFI VGA
+       physical id: 1
+       logical name: /dev/fb0
+       capabilities: fb
+       configuration: depth=32 resolution=1024,768
+  *-input:0
+       product: Sleep Button
+       physical id: 2
+       logical name: input0
+       logical name: /dev/input/event0
+       capabilities: platform
+  *-input:1
+       product: Power Button
+       physical id: 3
+       logical name: input1
+       logical name: /dev/input/event1
+       capabilities: platform
+  *-input:2
+       product: Power Button
+       physical id: 4
+       logical name: input2
+       logical name: /dev/input/event2
+       capabilities: platform

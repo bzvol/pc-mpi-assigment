@@ -13,4 +13,4 @@ Run this:
 
 I used N_RUNS=10, NODES=8, M,N=1000, MAX_ITER=100, X1-X2,Y1-Y2=(-2;2). With these parameters, it took about 20-30 secs for slurm to finish. Maybe try with more nodes or larger image size.
 
-For me, by making larger images, the execution time incremented exponentially. For a 5000x5000 image, it took ~30s, for a 20.000x20.000 image it was 6-7 mins **for one run**.
+**Update: It took a few hours for me to realize why block distribution is bad. I will update the code to use cyclic/block-cyclic distribution.**

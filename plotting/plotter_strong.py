@@ -1,15 +1,10 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-import numpy as np
 
 # Load CSV data
 data = pd.read_csv('mandelbrot.csv')
 
 # ranks,exec_time,stddev
-# 8,0.71625530000000004,0.021670988081072821
-# 16,0.38489480000000004,0.0035466599724247642
-# 32,0.20096549999999999,0.0011443878931551106
-# 64,0.11387229999999998,0.001854232404527549
 
 def speedup(p):
     return data['exec_time'][0] / data['exec_time'][data['ranks'].searchsorted(p)]

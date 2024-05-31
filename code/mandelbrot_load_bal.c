@@ -60,68 +60,25 @@ int main(int argc, char **argv)
     double y1 = atof(argv[6]);
     double y2 = atof(argv[7]);
 
-    int *local_picture = malloc(m * n * sizeof(int));
+    int n_rows = 0;
+    for (int i = rank; i < m; i += size)
+        n_rows++;
 
-    double start_time, end_time;
-    MPI_Barrier(MPI_COMM_WORLD);
-    start_time = MPI_Wtime();
+    int *local_picture = malloc(m * n * sizeof(int));
 
     mandelbrot(m, n, x1, x2, y1, y2, max_iter, local_picture, size, rank);
 
-    MPI_Barrier(MPI_COMM_WORLD);
-    end_time = MPI_Wtime();
-
-    double execution_time = end_time - start_time;
-
-    double max_execution_time;
-    MPI_Reduce(&execution_time, &max_execution_time, 1, MPI_DOUBLE,
-               MPI_MAX, 0, MPI_COMM_WORLD);
-
-#ifdef CHECK /* Output image to stderr */
-
-    int *full_picture;
-    if (rank == NODE_0)
-        full_picture = malloc(m * n * sizeof(int));
-
-    for (int i = rank; i < m; i += size)
-        MPI_Gather(local_picture + i * n, n, MPI_INT,
-                   full_picture + i * n, n, MPI_INT, NODE_0, MPI_COMM_WORLD);
-
-    if (rank == NODE_0)
-    {
-        fprintf(stderr, "P2\n");
-        fprintf(stderr, "%d %d\n", n, m);
-        fprintf(stderr, "%d\n", max_iter);
-        for (int i = 0; i < m; i++)
-        {
-            for (int j = 0; j < n; j++)
-            {
-                fprintf(stderr, "%d ", full_picture[i * n + j]);
-            }
-            fprintf(stderr, "\n");
-        }
-
-        free(full_picture);
-    }
-
-#else /* Output [% of computed subset in Mandelbrot set] to stderr */
-
-    int local_count = 0;
+    double local_flops = 8 * n_rows * n;
     for (int i = rank; i < m; i += size)
         for (int j = 0; j < n; j++)
-            if (local_picture[i * n + j] == max_iter)
-                local_count++;
+            local_flops += 10 * local_picture[i * n + j];
 
-    int total_count;
-    MPI_Reduce(&local_count, &total_count, 1, MPI_INT, MPI_SUM, 0, MPI_COMM_WORLD);
+    double min_flops, max_flops;
+    MPI_Reduce(&local_flops, &min_flops, 1, MPI_DOUBLE, MPI_MIN, 0, MPI_COMM_WORLD);
+    MPI_Reduce(&local_flops, &max_flops, 1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD);
 
     if (rank == NODE_0)
-    {
-        double p = (double)total_count / (m * n);
-        fprintf(stderr, "%lf\n", p);
-    }
-
-#endif
+        printf("%lf\n", max_flops / min_flops);
 
     free(local_picture);
 

@@ -9,9 +9,9 @@
  * at a m x n resolution. The value of picture[i, j] is
  * the number of iterations before bailout. */
 void mandelbrot(int m, int n, double x1, double x2, double y1, double y2,
-                int max_iter, int *picture, int start_row, int end_row)
+                int max_iter, int *picture, int size, int rank)
 {
-    for (int i = start_row; i < end_row; i++)
+    for (int i = rank; i < m; i += size)
     {
         for (int j = 0; j < n; j++)
         {
@@ -60,28 +60,13 @@ int main(int argc, char **argv)
     double y1 = atof(argv[6]);
     double y2 = atof(argv[7]);
 
-    int *picture = malloc(m * n * sizeof(int));
-
-    int rows_per_process = m / size;
-    int remaining_rows = m % size;
-
-    int start_row = rank * rows_per_process;
-
-    if (rank < remaining_rows)
-    {
-        start_row += rank;
-        rows_per_process++;
-    }
-    else
-        start_row += remaining_rows;
-
-    int end_row = start_row + rows_per_process;
+    int *local_picture = malloc(m * n * sizeof(int));
 
     double start_time, end_time;
     MPI_Barrier(MPI_COMM_WORLD);
     start_time = MPI_Wtime();
 
-    mandelbrot(m, n, x1, x2, y1, y2, max_iter, picture, start_row, end_row);
+    mandelbrot(m, n, x1, x2, y1, y2, max_iter, local_picture, size, rank);
 
     MPI_Barrier(MPI_COMM_WORLD);
     end_time = MPI_Wtime();
@@ -92,26 +77,9 @@ int main(int argc, char **argv)
     MPI_Reduce(&execution_time, &max_execution_time, 1, MPI_DOUBLE,
                MPI_MAX, 0, MPI_COMM_WORLD);
 
-    /* Compute flops */
-    double local_flops = 8 * rows_per_process * n;
-    for (int i = start_row; i < end_row; i++)
-        for (int j = 0; j < n; j++)
-            local_flops += 10 * picture[i * n + j];
+    if (rank == NODE_0) printf("%lf\n", max_execution_time);
 
-    printf("RANK %d FLOPS: %lf\n", rank, local_flops);
-
-    double max_flops, min_flops;
-    MPI_Reduce(&local_flops, &max_flops, 1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD);
-    MPI_Reduce(&local_flops, &min_flops, 1, MPI_DOUBLE, MPI_MIN, 0, MPI_COMM_WORLD);
-
-    // Load balance
-    if (rank == NODE_0) {
-        printf("MIN_FLOPS: %lf\n", min_flops);
-        printf("MAX_FLOPS: %lf\n", max_flops);
-        printf("LB: %lf\n", max_flops / min_flops);
-    }
-
-    free(picture);
+    free(local_picture);
 
     MPI_Finalize();
 
